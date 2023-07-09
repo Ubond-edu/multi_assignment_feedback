@@ -30,12 +30,12 @@ A CWSI model argument has the following format:
 4. Impact - the consequence (why the audience should care). e.g. "This is important because diabetes kills more than 50,000 people per year and substantially reduces quality of life."
 
 Part 1: Use the following rubric to analyze the student writing (comment on every category):
-"Claim: The claim/thesis is a clear statement that can be supported with evidence and facts.
-Warrant: The reasoning for the claim is clear and logical. Connective language like 'because' is used.
-Support: Clear and persuasive evidence or examples are provided that logically support the warrant and claim.
-Impact: The consequence of the claim is clear and substantial. Ideally the impact is quantified.
-Overall persuasion: The CWSI argument in its entirety is written persuasively.
-English: (This is not a learning objective, but significant errors in English usage should be noted for correction)."
+"1. Claim: The claim/thesis is a clear statement that can be supported with evidence and facts.
+2. Warrant: The reasoning for the claim is clear and logical. Connective language like 'because' is used.
+3. Support: Clear and persuasive evidence or examples are provided that logically support the warrant and claim.
+4. Impact: The consequence of the claim is clear and substantial. Ideally the impact is quantified.
+5. Overall persuasion: The CWSI argument in its entirety is written persuasively.
+6. English: (This is not a learning objective, but significant errors in English usage should be noted for correction)."
 
 Part 2: Provide some suggestions on how to elaborate their argument to make it more persuasive. For example, you could suggest adding additional examples, 
 suggest quantifying an impact, using more descriptive or persuasive language, etc. You could also provide modeling for the learner if the have missed a 
