@@ -48,7 +48,7 @@ Here's the student writing to evaluate:
 """
 
         try:
-            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=400, temperature=0.3)
+            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=500, temperature=0.3)
             feedback = response.choices[0].text.strip()
         except Exception as e:
             st.error(f"Error: {e}")
