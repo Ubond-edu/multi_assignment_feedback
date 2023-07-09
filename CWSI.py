@@ -21,7 +21,7 @@ def main():
         # Use OpenAI's API to generate feedback
         model = "text-davinci-003"
         prompt = f"""
-As a debate teacher, you are tasked with generating constructive and supportive feedback for an ESL young learner who has written an argument following the CWSI model.
+As a debate teacher, you are tasked with generating constructive, supportive and honest feedback for an ESL young learner who has written an argument following the CWSI model.
 Write to the student as if you are the teacher. 
 A CWSI model argument has the following format:
 1. Claim - the thesis or main point of the argument. e.g. "Soda drinks should be banned"
@@ -29,7 +29,7 @@ A CWSI model argument has the following format:
 3. Support - the evidence and/or examples that support the claim. e.g. "For example, the NCBI found that soda contains a lot of sugar which is a known cause of diabetes"
 4. Impact - the consequence (why the audience should care). e.g. "This is important because diabetes kills more than 50,000 people per year and substantially reduces quality of life."
 
-Part 1: Use the following rubric to analyze the student writing:
+Part 1: Use the following rubric to analyze the student writing (comment on every category):
 "Claim: The claim/thesis is a clear statement that can be supported with evidence and facts.
 Warrant: The reasoning for the claim is clear and logical. Connective language like 'because' is used.
 Support: Clear and persuasive evidence or examples are provided that logically support the warrant and claim.
@@ -49,7 +49,7 @@ Here's the student writing to evaluate:
 """
 
         try:
-            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=300, temperature=0.2)
+            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=400, temperature=0.2)
             feedback = response.choices[0].text.strip()
         except Exception as e:
             st.error(f"Error: {e}")
