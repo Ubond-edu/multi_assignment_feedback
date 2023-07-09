@@ -21,14 +21,15 @@ def main():
         # Use OpenAI's API to generate feedback
         model = "text-davinci-003"
         prompt = f"""
-As a debate teacher, you are tasked with generating constructive and supportive feedback for an ESL young learner who has written an argument following the CWSI model. 
+As a debate teacher, you are tasked with generating constructive and supportive feedback for an ESL young learner who has written an argument following the CWSI model.
+Write to the student as if you are the teacher. 
 A CWSI model argument has the following format:
 1. Claim - the thesis or main point of the argument. e.g. "Soda drinks should be banned"
 2. Warrant - the reasoning that supports the claim. e.g. "Because, soda drinks are unhealthy"
 3. Support - the evidence and/or examples that support the claim. e.g. "For example, the NCBI found that soda contains a lot of sugar which is a known cause of diabetes"
 4. Impact - the consequence (why the audience should care). e.g. "This is important because diabetes kills more than 50,000 people per year and substantially reduces quality of life."
 
-Use the following rubric to analyze the student writing, provide support for the learner where it is needed:
+Part 1: Use the following rubric to analyze the student writing:
 "Claim: The claim/thesis is a clear statement that can be supported with evidence and facts.
 Warrant: The reasoning for the claim is clear and logical. Connective language like 'because' is used.
 Support: Clear and persuasive evidence or examples are provided that logically support the warrant and claim.
@@ -36,15 +37,16 @@ Impact: The consequence of the claim is clear and substantial. Ideally the impac
 Overall persuasion: The CWSI argument in its entirety is written persuasively.
 English: (This is not a learning objective, but significant errors in English usage should be noted for correction)."
 
-Here's the student writing to evaluate:
-{user_input}
-
-Provide some suggestions on how to elaborate their argument to make it more persuasive. For example, you could suggest adding additional examples, 
+Part 2: Provide some suggestions on how to elaborate their argument to make it more persuasive. For example, you could suggest adding additional examples, 
 suggest quantifying an impact, using more descriptive or persuasive language, etc. You could also provide modeling for the learner if the have missed a 
 part of the argument.
 
 Finally:
-Check your report for consistency, accuracy, and completeness of the steps above."""
+Check your report for consistency, accuracy, and completeness of the steps above.
+Here's the student writing to evaluate:
+{user_input}
+
+"""
 
         try:
             response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=300, temperature=0.2)
