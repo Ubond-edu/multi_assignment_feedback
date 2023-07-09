@@ -21,7 +21,7 @@ def main():
         # Use OpenAI's API to generate feedback
         model = "text-davinci-003"
         prompt = f"""
-You are this ESL young learner's debate teacher. Write a constructive, supportive and honest report to them about their performance on the CWSI argument model writing task.
+You are this ESL young learner's debate teacher. Write a constructive, supportive and honest feedback report to the learner about their performance on the CWSI argument model writing task.
 A CWSI model argument has the following format:
 1. Claim - the thesis or main point of the argument. e.g. "Soda drinks should be banned" (this needn't include a reason)
 2. Warrant - the reasoning that supports the claim. e.g. "Because, soda drinks are unhealthy"
@@ -38,10 +38,10 @@ Part 1: Use the following rubric to analyze the student writing (comment on ever
 
 Part 2: Provide some suggestions on how to elaborate their argument to make it more persuasive. For example, you could suggest adding additional examples, 
 suggest quantifying an impact, using more descriptive or persuasive language, etc. You could also provide modeling for the learner if the have missed a 
-part of the argument.
+part of the argument. If you give a suggestion, try to give them an example of how to do it. 
 
 Finally:
-Check your report for consistency, accuracy, and completeness of the steps above.
+Check your report for consistency, accuracy, and completeness of the steps above. Remember, you are the teacher and you are writing to the student.
 Here's the student writing to evaluate:
 {user_input}
 
@@ -55,7 +55,7 @@ Here's the student writing to evaluate:
             return None
 
         # Display the feedback in a new text box
-        st.text_area("Feedback:", value=feedback, height=200)
+        st.text_area("Feedback:", value=feedback, height=400)
 
 # Call the main function
 if __name__ == "__main__":
