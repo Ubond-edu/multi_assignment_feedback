@@ -8,7 +8,7 @@ assignments = ["CWSI", "Rebuttal"]  # Add more assignments as needed
 # Define main function for the streamlit app
 def main():
 
-    st.title("CWSI Argument Feedback")
+    st.title("Assignment Feedback")
     
     # Create a search bar
     search_term = st.text_input("Search for an assignment:")
