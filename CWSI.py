@@ -100,7 +100,7 @@ Here's the student writing to evaluate:
             return None
 
         try:
-            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=200, temperature=0.2)
+            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=400, temperature=0.2)
             feedback = response.choices[0].text.strip()
         except Exception as e:
             st.error(f"Error: {e}")
