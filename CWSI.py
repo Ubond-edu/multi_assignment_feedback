@@ -10,14 +10,8 @@ def main():
 
     st.title("Assignment Feedback")
 
-    # Create a search bar
-    search_term = st.text_input("Search for an assignment:")
-
-    # Filter the list of assignments based on the search term
-    filtered_assignments = [assignment for assignment in assignments if search_term.lower() in assignment.lower()]
-
     # Create a dropdown menu for the assignments
-    selected_assignment = st.selectbox("Select an assignment:", options=filtered_assignments)
+    selected_assignment = st.selectbox("Select an assignment:", options=assignments)
 
     # Display the selected assignment
     st.write(f"You selected {selected_assignment}")
