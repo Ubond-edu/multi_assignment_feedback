@@ -2,11 +2,26 @@
 import streamlit as st
 import openai
 
+# Define a list of assignments
+assignments = ["CWSI", "Rebuttal"]  # Add more assignments as needed
+
 # Define main function for the streamlit app
 def main():
 
     st.title("CWSI Argument Feedback")
     
+    # Create a search bar
+    search_term = st.text_input("Search for an assignment:")
+
+    # Filter the list of assignments based on the search term
+    filtered_assignments = [assignment for assignment in assignments if search_term.lower() in assignment.lower()]
+
+    # Create a dropdown menu for the assignments
+    selected_assignment = st.selectbox("Select an assignment:", options=filtered_assignments)
+
+    # Display the selected assignment
+    st.write(f"You selected {selected_assignment}")
+
     # Create a text input box for the writing sample
     user_input = st.text_area("Enter your text here:", height=200)
 
@@ -20,7 +35,10 @@ def main():
     if st.button("Get Feedback"):
         # Use OpenAI's API to generate feedback
         model = "text-davinci-003"
-        prompt = f"""
+
+        # Choose the prompt based on the selected assignment
+        if selected_assignment == "CWSI":
+            prompt = f"""
 You are this ESL young learner's debate teacher. Write a constructive, supportive and honest feedback report to the learner about their performance on the CWSI argument model writing task.
 A CWSI model argument has the following format:
 1. Claim - the thesis or main point of the argument. e.g. "Soda drinks should be banned" (this needn't include a reason)
@@ -50,16 +68,46 @@ Here's the student writing to evaluate:
 {user_input}
 
 """
+        elif selected_assignment == "Rebuttal":
+            prompt = f"""
+You are this ESL young learner's debate teacher. Write a constructive, supportive and honest feedback report to the learner about their performance on the rebuttal writing task.
+A rebuttal is an attack on an argument.
+
+Part 1: Friendly and supportive opening
+For example, a student who did very well might get a statement like: "Great job! You're doing really well at writing rebuttal.". Whereas, a 
+student who has significant problems might get a statement like: "Great effort! There's some parts of your rebuttal that are really good and some parts that could use improvement."
+
+Part 2: Use the following rubric to analyze the student writing (comment on every category):
+"1. Is the opponent's argument signposted e.g. "They said/the opponents stated that...?
+2. Is a clear counterclaim made that directly attacks the oponent's claim?
+3. Is the counterclaim elaborated and supported by logical reasoning?
+4. Is the counterclaim suppoorted by relevant evidence and examples?
+5. Overall, is the rebuttal in its entirety written persuasively?
+6. Were there any errors in English usage that need correcting?"
+
+Part 3: Provide some specific suggestions on how to elaborate their rebuttal to make it more persuasive. For example, you could suggest adding additional examples, 
+suggest quantifying evidence, using more descriptive or persuasive language, etc. You could also provide modeling for the learner if the have missed a 
+part of the rebuttal. If you give a suggestion, try to give them an example of how to do it. 
+
+Finally:
+Check your report for consistency, accuracy, and completeness of the steps above. Remember, you are the teacher and you are writing to the student.
+Here's the student writing to evaluate:
+{user_input}
+
+"""
+        else:
+            st.error(f"Invalid assignment: {selected_assignment}")
+            return None
 
         try:
-            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=500, temperature=0.3)
+            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=200, temperature=0.2)
             feedback = response.choices[0].text.strip()
         except Exception as e:
             st.error(f"Error: {e}")
             return None
 
-        # Display the feedback in a new text box
-        st.text_area("Feedback:", value=feedback, height=400)
+        # Display the feedback
+        st.write(feedback)
 
 # Call the main function
 if __name__ == "__main__":
