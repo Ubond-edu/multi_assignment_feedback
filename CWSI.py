@@ -1,17 +1,22 @@
-# Import necessary libraries
+    # Import necessary libraries
 import streamlit as st
 import openai
 
 # Define a list of assignments
 assignments = ["CWSI", "Rebuttal"]  # Add more assignments as needed
 
-# Define main function for the streamlit app
+# Define main function for the Streamlit app
 def main():
+    st.title("CWSI Argument Feedback")
+    
+    # Create a search bar
+    search_term = st.text_input("Search for an assignment:")
 
-    st.title("Assignment Feedback")
+    # Filter the list of assignments based on the search term
+    filtered_assignments = [assignment for assignment in assignments if search_term.lower() in assignment.lower()]
 
     # Create a dropdown menu for the assignments
-    selected_assignment = st.selectbox("Select an assignment:", options=assignments)
+    selected_assignment = st.selectbox("Select an assignment:", options=filtered_assignments)
 
     # Display the selected assignment
     st.write(f"You selected {selected_assignment}")
@@ -24,9 +29,10 @@ def main():
 
     # Set the OpenAI API key
     openai.api_key = openai_api_key
-    
+
     # Create a button that when clicked will generate feedback
     if st.button("Get Feedback"):
+        # Choose the prompt based on the selected assignment
         # Use OpenAI's API to generate feedback
         model = "text-davinci-003"
 
@@ -92,10 +98,14 @@ Here's the student writing to evaluate:
         else:
             st.error(f"Invalid assignment: {selected_assignment}")
             return None
-
         try:
-            response = openai.Completion.create(engine=model, prompt=prompt, max_tokens=400, temperature=0.2)
-            feedback = response.choices[0].text.strip()
+            # Adjusted API Call for OpenAI
+            response = openai.ChatCompletion.create(
+                model="text-davinci-003",
+                messages=[{"role": "system", "content": "You are a debate teacher providing feedback."}, 
+                          {"role": "user", "content": user_input}]
+            )
+            feedback = response.choices[0].message['content'].strip()
         except Exception as e:
             st.error(f"Error: {e}")
             return None
